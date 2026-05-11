@@ -277,11 +277,13 @@ struct wolfIP_sockaddr_in {
 struct wolfIP_sockaddr { uint16_t sa_family; };
 typedef uint32_t socklen_t;
 
+#ifndef WOLFIP_NO_POSIX_TYPES
 #if defined(__has_include)
 #if __has_include(<sys/socket.h>)
 #include <sys/socket.h>
 #include <sys/uio.h>
 #define WOLFIP_HAVE_POSIX_TYPES 1
+#endif
 #endif
 #endif
 
