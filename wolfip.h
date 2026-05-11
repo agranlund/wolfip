@@ -120,8 +120,14 @@ typedef uint32_t ip4;
 
 /* Macros, compiler specific. */
 #define PACKED __attribute__((packed))
+
+#if defined(WOLFIP_BIG_ENDIAN) || defined(__BIG_ENDIAN__) || (defined(__BYTE_ORDER__) && defined(__ORDER_BIG_ENDIAN__) && (__BYTE_ORDER__ == __ORDER_BIG_ENDIAN__))
+#define ee16(x) (x)
+#define ee32(x) (x)
+#else
 #define ee16(x) __builtin_bswap16(x)
 #define ee32(x) __builtin_bswap32(x)
+#endif
 
 #ifndef WOLFIP_EAGAIN
 #ifdef EAGAIN
